@@ -9,6 +9,7 @@
 // This implementation is based on WebCore Bezier implmentation
 // http://opensource.apple.com/source/WebCore/WebCore-955.66/platform/graphics/UnitBezier.h
 //
+import UIKit
 
 private let epsilon: CGFloat = 1.0 / 1000
 
@@ -43,11 +44,11 @@ struct UnitBezier {
         t2 = x
         for _ in 0..<8 {
             x2 = sampleCurveX(t2) - x
-            if fabs(x2) < epsilon {
+            if abs(x2) < epsilon {
                 return t2
             }
             d2 = sampleCurveDerivativeX(t2)
-            if fabs(x2) < 1e-6 {
+            if abs(x2) < 1e-6 {
                 break
             }
             t2 = t2 - x2 / d2
@@ -67,7 +68,7 @@ struct UnitBezier {
         
         while t0 < t1 {
             x2 = sampleCurveX(t2)
-            if fabs(x2 - x) < epsilon {
+            if abs(x2 - x) < epsilon {
                 return t2
             }
             if x > x2 {
